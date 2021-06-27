@@ -6,7 +6,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 import {useAuthState} from 'react-firebase-hooks/auth';
-import {useCollectionData} from 'react/firestore'
+import {useCollectionData} from 'react-firebase-hooks/firestore'
 
 firebase.initializeApp({
   apiKey: "AIzaSyD-L_StMyyzMij4CZIB5OwKrehWFPPEsKM",
@@ -22,9 +22,11 @@ firebase.initializeApp({
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
-const [user] = useAuthState(auth);
+
 
 function App() {
+  const [user] = useAuthState(auth);
+
   return (
     <div className="App">
       <header>
@@ -45,14 +47,15 @@ function SignIn(){
     auth.signInWithPopup(provider);
   }
 
-  //sign in buttong
-  <button onClick={signInWithGoogle}>Sign in with Google</button>
+  //sign in button
+  return(
+  <button onClick={signInWithGoogle}>Sign in with Google</button>)
 }
 function ChatRoom() {
   const messagesRef = firestore.collection('messages');
   const query = messagesRef.orderBy('createdAt').limit(25);
 
-  const [messages] = useCollectioData(query, {idField:'id'});
+  const [messages] = useCollectionData(query, {idField:'id'});
   return(
     <>
     <div>
