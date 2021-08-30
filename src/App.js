@@ -9,14 +9,13 @@ import {useAuthState} from 'react-firebase-hooks/auth';
 import {useCollectionData} from 'react-firebase-hooks/firestore'
 
 firebase.initializeApp({
-  apiKey: "AIzaSyD-L_StMyyzMij4CZIB5OwKrehWFPPEsKM",
-    authDomain: "line-583cd.firebaseapp.com",
-    databaseURL: "https://line-583cd-default-rtdb.firebaseio.com",
-    projectId: "line-583cd",
-    storageBucket: "line-583cd.appspot.com",
-    messagingSenderId: "320464290156",
-    appId: "1:320464290156:web:c89b4ba01fa94581b3f349",
-    measurementId: "G-K8LHZD43X5"
+  apiKey: "AIzaSyBznLlU-GFHbU2CYKho4oGN3Y0tWzOEqVw",
+  authDomain: "line-6610e.firebaseapp.com",
+  projectId: "line-6610e",
+  storageBucket: "line-6610e.appspot.com",
+  messagingSenderId: "915334769602",
+  appId: "1:915334769602:web:14d9c66fd72f727267845b",
+  measurementId: "G-31KJ7XCBYC"
 })
 
 const auth = firebase.auth();
@@ -59,7 +58,10 @@ function ChatRoom() {
   return(
     <>
     <div>
-      {messages&&messages.map (msg => <ChatMessage key = {msg.id} message={msg} />)}
+      {messages&&messages.map(msg => <ChatMessage key = {msg.id} message={msg} />)}
+    </div>
+    <div>
+      sa mere la pute
     </div>
     </>
   )
