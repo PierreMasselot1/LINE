@@ -51,6 +51,8 @@ function SignIn(){
   <button onClick={signInWithGoogle}>Sign in with Google</button>)
 }
 function ChatRoom() {
+  const dummy = useRef();
+
   const messagesRef = firestore.collection('messages');
   const query = messagesRef.orderBy('createdAt').limit(25);
 
@@ -61,19 +63,21 @@ function ChatRoom() {
     e.preventDefault();
     const{uid, photoURL} = auth.currentUser;
 
-    await messagesRef.add({
+    messagesRef.add({
        text: formValue,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
          uid, 
          photoURL })
 
     setFormValue('');
+    dummy.current.scrollIntoView({behavior: 'smooth'});
   }
   return (
     <>
-      <div>
+      <main>
         {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
-      </div>
+        <div ref={dummy}></div>
+      </main>
       <form onSubmit={sendMessage}>
         <input value={formValue} onChange={(e) => setFormValue(e.target.value)}/>
         <button type="submit">💬</button>
@@ -94,7 +98,6 @@ function ChatMessage(props) {
   const { text, uid, photoURL } = props.message;
 
   const messageClass = uid === auth.currentUser.uid ? 'sent' : ' received';
-
   return (<div className={`message ${messageClass}`}>
     <img src={photoURL} />
     <p>{text}</p>
